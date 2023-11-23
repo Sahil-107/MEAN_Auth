@@ -10,10 +10,10 @@ router.post('/create', async (req, res, next)=>{
             await newRole.save();
             return res.send("Role Created!");
         } else {
-            return res.statusCode(400).send("Bad request");
+            return res.status(400).send("Bad request");
         }
     } catch (error) {
-        return res.statusCode(500).send("Internal server Error");
+        return res.status(500).send("Internal server Error");
 
     }
 })

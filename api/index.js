@@ -15,6 +15,8 @@ const connectMongoDB = async ()=>{
     }
 }
 
+app.use(express.json());
+
 app.use("/api/role", router)
 
 app.listen(8800, ()=>{
