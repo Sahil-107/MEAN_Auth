@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import router from './routes/role.js'
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ const connectMongoDB = async ()=>{
     }
 }
 
+app.use("/api/role", router)
 
 app.listen(8800, ()=>{
     connectMongoDB();
