@@ -2,18 +2,18 @@ import express from 'express';
 import Role from '../models/Role.js';
 import { createRole, deleteRole, getAllRoles, updateRole } from '../controllers/role.controller.js';
 
-const router = express.Router();
+const roleRouter = express.Router();
 
 // create role in db
-router.post('/create', createRole);
+roleRouter.post('/create', createRole);
 
 // update role in db
-router.put('/update/:id', updateRole)
+roleRouter.put('/update/:id', updateRole)
 
 // get all the roles from db
-router.get('/getAllRoles', getAllRoles);
+roleRouter.get('/getAllRoles', getAllRoles);
 
 // delete a role
-router.delete('/deleteRole/:id', deleteRole);
+roleRouter.delete('/deleteRole/:id', deleteRole);
 
-export default router;
+export default roleRouter;
