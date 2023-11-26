@@ -1,6 +1,8 @@
 import Role from "../models/Role.js"
 import User from '../models/User.js'
 import bcrypt from "bcrypt";
+import { CreateError } from "../utils/error.js";
+import { CreateSuccess } from "../utils/success.js";
 
 export const register = async (req, res, next)=>{
     const role = await Role.find({role: "User"});
@@ -19,7 +21,8 @@ export const register = async (req, res, next)=>{
     });
  
     await newUser.save();
-    return res.status(200).send("User registered successfully!")
+    // return res.status(200).send("User registered successfully!")
+    return next(CreateSuccess(200, "User Registered Successfully!!"))
 }
 
 
@@ -27,18 +30,18 @@ export const login = async (req, res, next)=>{
     try {
         const user = await User.findOne({email: req.body.email})
         if(!user){
-            return res.status(404).send("User not found!")
+            return next(CreateError(404, "User not found!"))
         }
 
         const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
 
         if (!isPasswordCorrect){
-            return res.status(400).send("Password is incorrect");
+            return next(CreateError(400, "Password is incorrect"))
         }
 
-        return res.status(200).send("Login Sucess!")
+        return next(CreateSuccess(200, "Login Success!"))
 
     } catch (error){
-        return res.status(500).send("Something went wrong!!")
+        return next(CreateError(500).send("Something went wrong!"))
     }
 }
