@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import roleRouter from './routes/role.js'
 import authRouter from './routes/auth.js';
+import userRouter from './routes/user.js';
 
 const app = express();
 dotenv.config();
@@ -15,10 +16,11 @@ const connectMongoDB = async ()=>{
         throw error
     }
 }
-
+ 
 app.use(express.json());
 app.use("/api/role", roleRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 // Response handler middleware
 app.use((obj, req, res, next)=>{
