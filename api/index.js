@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import roleRouter from './routes/role.js'
 import authRouter from './routes/auth.js';
 import userRouter from './routes/user.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 dotenv.config();
@@ -18,6 +19,7 @@ const connectMongoDB = async ()=>{
 }
  
 app.use(express.json());
+app.use(cookieParser());
 app.use("/api/role", roleRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
