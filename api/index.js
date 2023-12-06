@@ -5,6 +5,7 @@ import roleRouter from './routes/role.js'
 import authRouter from './routes/auth.js';
 import userRouter from './routes/user.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app = express();
 dotenv.config();
@@ -17,7 +18,12 @@ const connectMongoDB = async ()=>{
         throw error
     }
 }
- 
+
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}))
+
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/role", roleRouter);
